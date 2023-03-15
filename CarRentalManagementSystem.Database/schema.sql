@@ -1,5 +1,4 @@
 use crms;
-
 CREATE TABLE CarCategories (
     CarCategoryId INT PRIMARY KEY IDENTITY,
     CategoryName NVARCHAR(255) NOT NULL,
@@ -16,7 +15,6 @@ CREATE TABLE Locations (
     Latitude DECIMAL(9, 6),
     Longitude DECIMAL(9, 6)
 );
-
 CREATE TABLE CarVariants (
     CarVariantId INT PRIMARY KEY IDENTITY,
     CarCategoryId INT FOREIGN KEY REFERENCES CarCategories(CarCategoryId),
@@ -35,6 +33,15 @@ CREATE TABLE Cars (
     IsAvailable BIT NOT NULL,
     ImageUrl NVARCHAR(255)
 );
+
+CREATE TABLE Clients (
+    ClientId INT PRIMARY KEY IDENTITY,
+    FullName NVARCHAR(100) NOT NULL,
+    Email NVARCHAR(255) UNIQUE NOT NULL,
+    PhoneNumber NVARCHAR(20),
+    Address NVARCHAR(255)
+);
+
 CREATE TABLE Users (
     UserId INT PRIMARY KEY IDENTITY,
     FirstName NVARCHAR(255) NOT NULL,
@@ -50,7 +57,6 @@ CREATE TABLE Users (
     ZipCode NVARCHAR(50),
     RegistrationDate DATETIME NOT NULL
 );
-
 CREATE TABLE Bookings (
     BookingId INT PRIMARY KEY IDENTITY,
     ClientId INT FOREIGN KEY REFERENCES Clients(ClientId),
@@ -61,7 +67,6 @@ CREATE TABLE Bookings (
     DropOffLocationId INT FOREIGN KEY REFERENCES Locations(LocationId),
     Status NVARCHAR(50) NOT NULL
 );
-
 CREATE TABLE Reservations (
     ReservationId INT PRIMARY KEY IDENTITY,
     UserId INT FOREIGN KEY REFERENCES Users(UserId),
